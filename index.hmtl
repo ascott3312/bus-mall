@@ -16,9 +16,9 @@
     <marquee></marquee>
     <main>
 
-        <img id="1" src="images/newYorkPizza.jpeg" />
-        <img id="2" src="images/detroitPizza.jpeg" />
-
+        <img id="1" src="img/bag.jpg" />
+        <img id="2" src="img/banana.jpg" />
+        <img id="3" src="imag/bathroom.jpg" />
     </main>
     <footer>
     </footer>
