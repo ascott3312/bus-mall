@@ -3,7 +3,7 @@
 }
 body
 {
- width: 1400px;
+ width: 1700px;
  margin: 0 auto;
  background-color: dodgerblue; 
 }
@@ -15,5 +15,18 @@ main {
 }
 h1 {
   font-size: 40px;
-  
+  margin: 10px;
+  font-family:Georgia, 'Times New Roman', Times, serif; cursive;  
+}
+h2 {
+  font-size: 25px;
+}
+aside {
+  width: 600px;
+  height: 650px;
+  font-size: 20px;
+  background-color: blue;
+  float: left;
+  color: whitesmoke;
+  font-family: sans-serif;
 }

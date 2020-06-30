@@ -18,7 +18,7 @@ var allProducts = [];
 function Products(name, imgUrl){
   this.name = name;
   this.imgUrl = imgUrl;
-  this.timesClicked = 0;
+  this.totalClicks = 0;
   this.timesShown = 0;
   allProducts.push(this);
 }
@@ -48,15 +48,20 @@ var totalClicks = 0;
 function imageWasClicked(event) {
   totalClicks++;
   if(event.srcElement.id === '1'){
-  img1Clicked++;}
+  allProducts[productIndex1].totalClicks++;
+  img1Clicked++;
+}
   else if(event.srcElement.id ==='2'){
-    img2Clicked++;}
+    allProducts[productIndex2].totalClicks++;
+    img2Clicked++;
+  }
   else if(event.srcElement.id ==='3'){
+    allProducts[productIndex3].totalClicks++;
     img3Clicked++;
   }  
-  console.log(img1Clicked);
-  console.log(img2Clicked);
-  console.log(img3Clicked);
+  console.log('Position One Clicked', img1Clicked);
+  console.log('Position Two Clicked', img2Clicked);
+  console.log('Position Three Clicked', img3Clicked);
   console.log(totalClicks);
   //add logic so that we dont see the same images from click to click
 var nextproductIndex1 = Math.floor(Math.random() * allProducts.length);
@@ -95,7 +100,7 @@ if(totalClicks >= rounds){
   for(var i = 0; i < allProducts.length;i++){
     var voteResultsListItem = document.createElement('li');
   //adding a template literalto utilize the object properties
-    voteResultsListItem.textContent = `${allProducts[i].name} was clicked on ${allProducts[i].timesClicked} times and was shown ${allProducts[i].timesShown} times.`;
+    voteResultsListItem.textContent = `${allProducts[i].name} was clicked on ${allProducts[i].totalClicks} times and was shown ${allProducts[i].timesShown} times.`;
     asideUL.appendChild(voteResultsListItem);  
   }
 }
