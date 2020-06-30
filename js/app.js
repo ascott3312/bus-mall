@@ -19,6 +19,7 @@ function Products(name, imgUrl){
   this.name = name;
   this.imgUrl = imgUrl;
   this.timesClicked = 0;
+  this.timesShown = 0;
   allProducts.push(this);
 }
 //create product objects
@@ -77,9 +78,11 @@ productIndex3 = nextproductIndex3;
 
 //Pick a random pircture to display
 imageElements[0].src = allProducts[productIndex1].imgUrl;
+allProducts[productIndex1].timesShown++;
 imageElements[1].src = allProducts[productIndex2].imgUrl;
+allProducts[productIndex2].timesShown++;
 imageElements[2].src = allProducts[productIndex3].imgUrl;
-}
+allProducts[productIndex3].timesShown++;
 //calcuale rounds
 if(totalClicks >= rounds){
   var footerElement = document.getElementsByTagName('footer')[0];
@@ -87,6 +90,15 @@ if(totalClicks >= rounds){
     footerElement.firstElementChild.remove();
   }
   footerElement.textContent = 'You picked products alot of times'
+  var asideUL = document.getElementById('voteResults');
+
+  for(var i = 0; i < allProducts.length;i++){
+    var voteResultsListItem = document.createElement('li');
+  //adding a template literalto utilize the object properties
+    voteResultsListItem.textContent = `${allProducts[i].name} was clicked on ${allProducts[i].timesClicked} times and was shown ${allProducts[i].timesShown} times.`;
+    asideUL.appendChild(voteResultsListItem);  
+  }
+}
 }
 //Create the event listner
 for(var i = 0; i < imageElements.length; i++) {

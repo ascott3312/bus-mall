@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+body
+{
+ width: 1400px;
+ margin: 0 auto;
+ background-color: dodgerblue; 
+}
+main {
+  text-align: center;
+  background-color: whitesmoke;
+  overflow: hidden;
+  padding-bottom: 25px;
+}
+h1 {
+  font-size: 40px;
+  
+}
