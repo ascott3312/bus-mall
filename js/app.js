@@ -21,7 +21,6 @@ function Products(name, imgUrl){
   this.timesClicked = 0;
   allProducts.push(this);
 }
-
 //create product objects
 var bag = new Products('Bag', 'img/bag.jpg');
 var banana = new Products('Banana','img/banana.jpg');
@@ -48,38 +47,39 @@ var totalClicks = 0;
 function imageWasClicked(event) {
   totalClicks++;
   if(event.srcElement.id === '1'){
-  allProducts[productIndex1].timesClicked++;}
+  img1Clicked++;}
   else if(event.srcElement.id ==='2'){
-    allProducts[productIndex2].timesClicked++;}
+    img2Clicked++;}
   else if(event.srcElement.id ==='3'){
-    allProducts[productIndex3].timesClicked++;
+    img3Clicked++;
   }  
+  console.log(img1Clicked);
+  console.log(img2Clicked);
+  console.log(img3Clicked);
   console.log(totalClicks);
-  console.log(allProducts);
-//add logic so that we dont see the same images from click to click
+  //add logic so that we dont see the same images from click to click
 var nextproductIndex1 = Math.floor(Math.random() * allProducts.length);
 while(nextproductIndex1  === productIndex1  || nextproductIndex2 === nextproductIndex1  || nextproductIndex3 === nextproductIndex1){
-nextprouctIndex1 = Math.floor(Math.random() * allProducts.length);
+nextproductIndex1 = Math.floor(Math.random() * allProducts.length);
 }
 var nextproductIndex2 = Math.floor(Math.random() * allProducts.length);
-while(nextproductIndex2 === productIndex2){
+while(nextproductIndex2 === productIndex2  || nextproductIndex2 === nextproductIndex1 || nextproductIndex2 === nextproductIndex3){
 nextproductIndex2 = Math.floor(Math.random() * allProducts.length);
 }
 var nextproductIndex3 = Math.floor(Math.random() * allProducts.length);
-while(nextproductIndex3 === productIndex3){
+while(nextproductIndex3 === productIndex3 || nextproductIndex3 === nextproductIndex2 || nextproductIndex3 === nextproductIndex1){
 nextproductIndex3 = Math.floor(Math.random() * allProducts.length);
 }
 //set up a passing a variable by reference to productIndex 1 and 2 and 3
-productIndex1 = nextproductIndex1
-productIndex2 = nextproductIndex2
-productIndex3 = nextproductIndex3
+productIndex1 = nextproductIndex1;
+productIndex2 = nextproductIndex2;
+productIndex3 = nextproductIndex3;
 
 //Pick a random pircture to display
 imageElements[0].src = allProducts[productIndex1].imgUrl;
 imageElements[1].src = allProducts[productIndex2].imgUrl;
 imageElements[2].src = allProducts[productIndex3].imgUrl;
 }
-
 //calcuale rounds
 if(totalClicks >= rounds){
   var footerElement = document.getElementsByTagName('footer')[0];
@@ -92,5 +92,4 @@ if(totalClicks >= rounds){
 for(var i = 0; i < imageElements.length; i++) {
   console.log('')
   imageElements[i].addEventListener('click',imageWasClicked);
-}  
-
+}
