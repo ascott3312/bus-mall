@@ -116,8 +116,8 @@ if(totalClicks >= rounds){
     //   debugger;
     imageElements[i].removeEventListener('click', imageWasClicked);
   }
-}
   runMyChart();
+}
 }//closing 
 function runMyChart() {
 
@@ -126,7 +126,7 @@ function runMyChart() {
   var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-          labels: getProductsArray['name'],
+          labels: getProductsArray('name'),
           datasets: [{
               label: '# of Votes',
               data: getProductsArray('totalClicks'),
