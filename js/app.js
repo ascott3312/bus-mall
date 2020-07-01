@@ -22,6 +22,15 @@ function Products(name, imgUrl){
   this.timesShown = 0;
   allProducts.push(this);
 }
+//new function for the chart table
+function getProductsArray(chartProducts) {
+  var answer = [];
+  for(i = 0; i < allProducts.length;i++){
+    answer[i] = allProducts[i][chartProducts];
+  }
+  console.log(answer);
+  return answer;
+}
 //create product objects
 var bag = new Products('Bag', 'img/bag.jpg');
 var banana = new Products('Banana','img/banana.jpg');
@@ -94,16 +103,72 @@ if(totalClicks >= rounds){
   if(footerElement.firstElementChild){
     footerElement.firstElementChild.remove();
   }
-  footerElement.textContent = 'You picked products alot of times'
+  // footerElement.textContent = 'You picked products alot of times'
   var asideUL = document.getElementById('voteResults');
-
-  for(var i = 0; i < allProducts.length;i++){
+ for(var i = 0; i < allProducts.length;i++){
     var voteResultsListItem = document.createElement('li');
   //adding a template literalto utilize the object properties
     voteResultsListItem.textContent = `${allProducts[i].name} was clicked on ${allProducts[i].totalClicks} times and was shown ${allProducts[i].timesShown} times.`;
     asideUL.appendChild(voteResultsListItem);  
   }
+  //Add in a remove the add event listener
+  for(var i = 0; i < imageElements.length; i++){
+    //   debugger;
+    imageElements[i].removeEventListener('click', imageWasClicked);
+  }
 }
+  runMyChart();
+}//closing 
+function runMyChart() {
+
+  var ctx = document.getElementById('resultsChart').getContext('2d');
+  
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: getProductsArray['name'],
+          datasets: [{
+              label: '# of Votes',
+              data: getProductsArray('totalClicks'),
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 99, 112, 0.2)',
+                  'rgba(54, 162, 215, 0.2)',
+                  'rgba(255, 206, 76, 0.2)',
+                  'rgba(75, 192, 182, 0.2)',
+                  'rgba(153, 102, 245, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 99, 112, 1)',
+                  'rgba(54, 162, 215, 1)',
+                  'rgba(255, 206, 76, 1)',
+                  'rgba(75, 192, 182, 1)',
+                  'rgba(153, 102, 245, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+},);
 }
 //Create the event listner
 for(var i = 0; i < imageElements.length; i++) {
