@@ -18,10 +18,15 @@ var allProducts = [];
 function Products(name, imgUrl){
   this.name = name;
   this.imgUrl = imgUrl;
-  this.totalClicks = 0;
+  // Second Step
+  if (totalClicks){
+    this.totalClicks = totalClicks;
+   } else {this.totalClicks = 0;
+   }
   this.timesShown = 0;
   allProducts.push(this);
 }
+
 //new function for the chart table
 function getProductsArray(chartProducts) {
   var answer = [];
@@ -31,6 +36,26 @@ function getProductsArray(chartProducts) {
   console.log(answer);
   return answer;
 }
+//Prototype for local storage
+Products.prototype.toString = function() {
+  
+  return `${this.name} products is from this.name for the specified arrayIndex, clicked ${this.totalClicks}times`;
+};
+
+var savedProductsString = localStorage.getItem('savedProducts');
+
+if (savedProductsString) {
+
+  var arrayOfNotProductObject = JSON.parse(savedProductsString);
+
+  for(var i = 0; i < arrayOfNotProductObject.length;i++) {
+    
+    new Products(arrayOfNotProductObject[i].name,
+    arrayOfNotProductObject[i].imgUrl,
+    arrayOfNotProductObject[i].totalClicks);
+  }
+} else {
+
 //create product objects
 var bag = new Products('Bag', 'img/bag.jpg');
 var banana = new Products('Banana','img/banana.jpg');
@@ -52,7 +77,7 @@ var unicorn = new Products('Unicorn','img/unicorn.jpg');
 var usb = new Products('Usb','img/usb.gif');
 var waterCan= new Products('Water-can', 'img/water-can.jpg');
 var wine = new Products('Wine-Glasses','img/wine-glass.jpg');
-
+}
 var totalClicks = 0;
 function imageWasClicked(event) {
   totalClicks++;
@@ -103,6 +128,10 @@ if(totalClicks >= rounds){
   if(footerElement.firstElementChild){
     footerElement.firstElementChild.remove();
   }
+
+  //Step one
+  localStorage.setItem('savedProducts', JSON.stringify(allProducts));
+
   // footerElement.textContent = 'You picked products alot of times'
   var asideUL = document.getElementById('voteResults');
  for(var i = 0; i < allProducts.length;i++){
